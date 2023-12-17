@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head></head>
+<body>
+<header th:fragment="navigation">
+    <nav class="main-nav">
+        <ul>
+            <li>
+                <a th:href="@{/}">Home</a>
+            </li>
+            <th:block sec:authorize="!isAuthenticated()">
+                <li>
+                    <a th:href="@{/users/login}">Login</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/register}">Register</a>
+                </li>
+                <li>
+                    <a th:href="@{/about}">About</a>
+                </li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <li>
+                    <a th:href="@{/routes/add}">Add new route</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/profile}">Profile</a>
+                </li>
+                <li th:if="false">
+                    <a href="/">Admin</a>
+                </li>
+                <li>
+                    <form th:method="post"
+                          th:action="@{/users/logout}">
+                        <input type="submit" class="myBtn" value="Logout">
+                    </form>
+                </li>
+            </th:block>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>

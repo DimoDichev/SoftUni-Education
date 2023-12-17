@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}"></head>
+<body>
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <h1 class="border-bottom">Register</h1>
+    <div class="d-flex justify-content-center ">
+        <div class="row g-3">
+            <form th:object="${userRegisterBindingModel}"
+                  th:action="@{/users/register}"
+                  th:method="post">
+                <div>
+                    <div class="col-auto">
+                        <label for="inputUsername" class="col-form-label ">Username</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{username}"
+                               th:errorclass="bg-danger"
+                               required
+                               minlength="4"
+                               maxlength="20"
+                               type="text"
+                               id="inputUsername"
+                               class="form-control"
+                               aria-describedby="usernameHelpInline">
+                        <small class="bg-danger text-light" th:errors="*{username}"></small>
+                        <small th:if="${usernameExist}" class="bg-danger text-light">Username is already exist</small>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputFullName" class="col-form-label ">Full Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{fullName}"
+                               th:errorclass="bg-danger"
+                               required
+                               minlength="4"
+                               maxlength="40"
+                               type="text"
+                               id="inputFullName"
+                               class="form-control"
+                               aria-describedby="fullNameHelpInline">
+                        <small class="bg-danger text-light" th:errors="*{fullName}"></small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputEmail" class="col-form-label ">Email</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{email}"
+                               th:errorclass="bg-danger"
+                               required
+                               type="email"
+                               id="inputEmail"
+                               class="form-control"
+                               aria-describedby="emailHelpInline">
+                        <small class="bg-danger text-light" th:errors="*{email}"></small>
+                        <small th:if="${emailExist}" class="bg-danger text-light">Email is already exist</small>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputAge" class="col-form-label ">Age</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{age}"
+                               required
+                               min="14"
+                               max="90"
+                               th:errorclass="bg-danger"
+                               type="number"
+                               id="inputAge"
+                               class="form-control"
+                               aria-describedby="ageHelpInline">
+                        <small class="bg-danger text-light" th:errors="*{age}"></small>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputPassword" class="col-form-label ">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{password}"
+                               th:errorclass="bg-danger"
+                               required
+                               minlength="5"
+                               maxlength="250"
+                               type="password"
+                               id="inputPassword"
+                               class="form-control"
+                               aria-describedby="passwordHelpInline">
+                        <small class="bg-danger text-light" th:errors="*{password}"></small>
+                        <small th:if="${passwordNotEquals}" class="bg-danger text-light">Password are not equals</small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputConfirmPassword" class="col-form-label ">Confirm Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{confirmPassword}"
+                               required
+                               minlength="5"
+                               maxlength="250"
+                               type="password"
+                               id="inputConfirmPassword"
+                               class="form-control"
+                               aria-describedby="confirmPasswordHelpInline">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/footer}"></footer>
+</body>
+</html>
